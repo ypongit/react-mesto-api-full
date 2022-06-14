@@ -1,0 +1,15 @@
+.popup__field-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 54px;
+}
+.popup__field-wrapper:nth-child(2){
+  margin-top: 2px;
+}
+
+@media screen and (max-width: 540px) {
+  .popup__field-wrapper{
+    margin-top: 75px;
+  }
+}

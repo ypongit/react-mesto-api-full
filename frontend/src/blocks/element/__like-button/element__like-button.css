@@ -1,0 +1,23 @@
+.element__like-button {
+  /* margin-right: 5px; */
+  margin-bottom: 5px;
+  width: 22px;
+  height: 19px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  background-image: url('../../../images/group.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  cursor: pointer;
+}
+.element__like-button:hover {
+  opacity: 0.5;
+}
+/*
+.element__like-button:active {
+  background-image: url('../../../images/group_act.svg');
+  opacity: 1;
+}
+*/

@@ -1,0 +1,9 @@
+.profile__avatar-cover {
+  width: 120px;
+  height: 120px;
+  background: rgba(0, 0, 0, 0.8);
+  background-image: url(../../../images/pensil.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 0;
+}

@@ -1,0 +1,31 @@
+.profile__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-image: url("../../../images/kusto.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* margin-right: 30px; */
+}
+
+.profile__avatar::before{
+  content: "";
+  width: 120px;
+  height: 120px;
+  /* background: #2A2C2F; */
+  position: absolute;
+  /* opacity: 0.3; */
+  transition: 0.3s;
+}
+.profile__avatar:hover::before {
+  background: rgba(0, 0, 0, 0.8);
+  background-image: url("../../../images/pensil.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+@media screen and (max-width: 540px) {
+  .profile__avatar {
+    margin: 0;
+  }
+}
