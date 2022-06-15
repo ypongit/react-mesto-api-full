@@ -10,8 +10,8 @@ const AuthentificationError = require('../errors/authentication-err');
 
 const MONGO_DUPLICATE_KEY_CODE = 11000;
 const saltRound = 10;
-
-const JWT_SECRET_KEY = '1234567890';
+const { NODE_ENV, JWT_SECRET_KEY } = process.env;
+// const JWT_SECRET_KEY = '1234567890';
 //  const req = require('express/lib/request');
 
 const getUserById = (req, res, next) => {
@@ -81,7 +81,11 @@ const login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       // аутентификация успешна! пользователь в переменной user
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET_KEY, { expiresIn: '7d' });
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET_KEY : 'dev-secret',
+        { expiresIn: '7d' },
+      );
 
       res.status(200).send({ token });
     })
