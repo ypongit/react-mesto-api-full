@@ -69,9 +69,9 @@ function App() {
         // Сохраняем карточки в стейт cards
         setCards(cardsData);
       })
-      .catch((err) => {
+      /* .catch((err) => {
         console.log(err);
-      });
+      }); */
   }, [])
 
   // добавление карточки
@@ -118,7 +118,7 @@ function App() {
       .then(currentUserData => {
         setCurrentUser(currentUserData);
       })
-      .catch((err) => { console.log(err); });
+      /* .catch((err) => { console.log(err); }); */
   }, []);
 
   // обработчик редактирования профиля
@@ -177,8 +177,8 @@ function App() {
   const handleRegister = (email, password) => {
     return mestoAuth.register(email, password)
     .then((res) => {
+      console.log('handleRegister.res ->', res  );
       handleInfoTooltipClick();
-
       if(res.data){
         setInfoTooltipTitle({
           icon: regSuccess,
@@ -203,7 +203,7 @@ function App() {
     // console.log('handleLogin -> ');
     return mestoAuth.authorize(email, password)
      .then((data) => {
-      // console.log('data -> ', data)
+      console.log('data -> ', data)
        // нужно проверить, есть ли у данных jwt
        if(!data.token){
          return;

@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 // const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
@@ -20,6 +21,8 @@ const { isAuthorized } = require('./middlewares/auth');
 app.use(express.json());
 
 app.use(requestLogger); // подключаем логгер запросов
+
+app.use(cors());
 
 app.use('/cards', isAuthorized, cardsRouter);
 

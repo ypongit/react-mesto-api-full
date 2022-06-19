@@ -1,6 +1,5 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'https://api.mestoyp.students.nomoredomains.xyz';
 const checkResponse = (response) => {
-  console.log("response ok -> ", response);
   if (response.ok){
     return response.json();
   }
@@ -21,17 +20,10 @@ export const register = (email, password) => {
   })
   .then((response) => {
     return response.json();
-    /* try {
-      if (response.status === 200){
-        return response.json();
-      }
-    }catch(e){
-      return (e)
-    } */
   })
   .then(res => {
     console.log(res);
-    return res;
+    // return res;
   })
   .catch((err) => console.log(err));
 };

@@ -111,12 +111,12 @@ setAvatar({avatar}) {
 
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-37',
+  baseUrl: 'https://api.mestoyp.students.nomoredomains.xyz',
   // authorization: '3e042cce-8939-40c2-9f95-48414868d982',
   headers: {
-    authorization: '3e042cce-8939-40c2-9f95-48414868d982',
+    // authorization: '3e042cce-8939-40c2-9f95-48414868d982',
     'Content-Type': 'application/json'
   }
 });
-// и экспортируйте этот экземпляр вместо самого класса
+
 export default api;
