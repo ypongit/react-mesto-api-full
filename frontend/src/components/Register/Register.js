@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Link, withRouter} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import * as mestoAuth from '../../mestoAuth'
 
 function Register(props) {
@@ -18,7 +18,7 @@ function Register(props) {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('state!', state)
+    console.log('handleSubmit.state!', state);
     // TODO: добавить логику обработки формы регистрации
     // if (state.password === state.confirmPassword){}
     let {email, password} = state;

@@ -1,3 +1,4 @@
+import { BASE_URL } from './constants';
 class Api {
   constructor({ baseUrl, headers }) {
     this._headers = headers;
@@ -111,7 +112,8 @@ setAvatar({avatar}) {
 
 
 const api = new Api({
-  baseUrl: 'https://api.mestoyp.students.nomoredomains.xyz',
+  // baseUrl: 'https://api.mestoyp.students.nomoredomains.xyz',
+  baseUrl: BASE_URL,
   // authorization: '3e042cce-8939-40c2-9f95-48414868d982',
   headers: {
     // authorization: '3e042cce-8939-40c2-9f95-48414868d982',

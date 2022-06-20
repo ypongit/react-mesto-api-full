@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory, withRouter } from "react-router-dom";
 import Header from '../Header';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
@@ -55,24 +55,30 @@ function App() {
 
   // запрос к API за данными карточек
   React.useEffect(() => {
-    api.getCards()
-      .then(res => {
-        const cardsData = res.map(item => {
-          return {
-            name: item.name,
-            link: item.link,
-            _id: item._id,
-            likes: item.likes,
-            owner: item.owner
-          }
-        });
-        // Сохраняем карточки в стейт cards
-        setCards(cardsData);
+    if (loggedIn) {
+      // запрос к API за данными пользователя
+      api.getProfile()
+      .then(currentUserData => {
+        setCurrentUser(currentUserData);
       })
-      /* .catch((err) => {
-        console.log(err);
-      }); */
-  }, [])
+      .catch((err) => console.log(err));
+
+      api
+        .getCards()
+        .then(res => {
+          const cardsData = res.map(item => {
+            return {
+              name: item.name,
+              link: item.link,
+              _id: item._id,
+              likes: item.likes,
+              owner: item.owner
+            }
+          });
+          // Сохраняем карточки в стейт cards
+          setCards(cardsData);
+      })}
+  }, [loggedIn]);
 
   // добавление карточки
   function handleAddPlaceSubmit({ name, link }) {
@@ -113,13 +119,13 @@ function App() {
     }
   }
   // запрос к API за данными пользователя
-  React.useEffect(() => {
+  /* React.useEffect(() => {
     api.getProfile()
       .then(currentUserData => {
         setCurrentUser(currentUserData);
       })
-      /* .catch((err) => { console.log(err); }); */
-  }, []);
+      /* .catch((err) => { console.log(err); });
+  }, []); */
 
   // обработчик редактирования профиля
   function handleUpdateUser({ name, about }) {
@@ -177,9 +183,9 @@ function App() {
   const handleRegister = (email, password) => {
     return mestoAuth.register(email, password)
     .then((res) => {
-      console.log('handleRegister.res ->', res  );
       handleInfoTooltipClick();
-      if(res.data){
+      console.log('handleRegiste.res -> ', res);
+      if(res){
         setInfoTooltipTitle({
           icon: regSuccess,
           title: "Вы успешно зарегистрировались!"
@@ -212,6 +218,7 @@ function App() {
         // сбросьте стейт, затем в колбэке установите
       setEmail(email);
       setLoggedIn(true);
+      console.log({loggedIn});
   });
   }
 
@@ -220,10 +227,13 @@ function App() {
   // эта функция проверит, действующий он или нет
     if (localStorage.getItem('jwt')){
       const jwt = localStorage.getItem('jwt');
-       mestoAuth.getContent(jwt).then((res) => {
+       mestoAuth.getContent(jwt)
+       .then((res) => {
+        console.log('CheckToken localStorage ->', res);
          if (res){
            setEmail(res.data.email);
            setLoggedIn(true);
+           console.log({loggedIn});
          }
        })
     }
@@ -268,7 +278,11 @@ function App() {
           </ProtectedRoute>
 
           <Route>
-            {loggedIn ? <Redirect to='/' /> : <Redirect to='/signin/' />}
+            {loggedIn ? (
+                <Redirect to='/' />
+              ) : (
+                <Redirect to='/signin/' />
+              )}
           </Route>
         </Switch>
 
