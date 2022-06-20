@@ -44,7 +44,21 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({password, email})
   })
-  .then(checkResponse)
+  .then((response => {
+    return response.json()
+    }
+  ))
+  .then((data) => {
+    console.log({data});
+    if (data.token){
+      localStorage.setItem('jwt', data.token);
+      return data;
+    } else {
+      return;
+    }
+  })
+  .catch(err => console.log(err));
+  // .then(checkResponse)
 };
 
 export const getContent = (token) => {

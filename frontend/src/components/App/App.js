@@ -39,6 +39,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState(null);
   // Контекст текущего пользователя
   const [currentUser, setCurrentUser] = React.useState({});
+
   const [cards, setCards] = React.useState([]);
 
   useEffect(() => {
@@ -57,10 +58,11 @@ function App() {
   React.useEffect(() => {
     if (loggedIn) {
       // запрос к API за данными пользователя
-      api.getProfile()
-      .then(currentUserData => {
-        setCurrentUser(currentUserData);
-      })
+      api
+        .getProfile()
+        .then(currentUserData => {
+          setCurrentUser(currentUserData);
+        })
       .catch((err) => console.log(err));
 
       api
@@ -211,12 +213,13 @@ function App() {
      .then((data) => {
       console.log('data -> ', data)
        // нужно проверить, есть ли у данных jwt
-       if(!data.token){
+       /* if(!data.token){
          return;
       }
-         localStorage.setItem('jwt', data.token);
+         localStorage.setItem('jwt', data.token); */
         // сбросьте стейт, затем в колбэке установите
       setEmail(email);
+      console.log({email});
       setLoggedIn(true);
       console.log({loggedIn});
   });
@@ -231,6 +234,7 @@ function App() {
        .then((res) => {
         console.log('CheckToken localStorage ->', res);
          if (res){
+            console.log('checkToken.res', res)
            setEmail(res.data.email);
            setLoggedIn(true);
            console.log({loggedIn});
