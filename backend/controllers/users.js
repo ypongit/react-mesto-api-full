@@ -7,10 +7,12 @@ const NotFoundError = require('../errors/not-found-err');
 const DuplicateError = require('../errors/duplicate-err');
 const ValidationError = require('../errors/validation-err');
 const AuthentificationError = require('../errors/authentication-err');
+require('dotenv').config();
 
 const MONGO_DUPLICATE_KEY_CODE = 11000;
 const saltRound = 10;
 const { NODE_ENV, JWT_SECRET_KEY } = process.env;
+// const { JWT_SECRET_KEY = 'dev-secret' } = process.env;
 // const JWT_SECRET_KEY = '1234567890';
 //  const req = require('express/lib/request');
 
@@ -83,7 +85,7 @@ const login = (req, res, next) => {
       // аутентификация успешна! пользователь в переменной user
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET_KEY : 'dev-secret',
+        JWT_SECRET_KEY,
         { expiresIn: '7d' },
       );
 

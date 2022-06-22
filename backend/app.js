@@ -1,5 +1,7 @@
 /* eslint-disable consistent-return */
 require('dotenv').config();
+
+const { NODE_ENV, JWT_SECRET_KEY } = process.env;
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -18,6 +20,7 @@ const app = express();
 mongoose.connect('mongodb://localhost:27017/mestodb');
 const { isAuthorized } = require('./middlewares/auth');
 
+console.log(process.env.NODE_ENV);
 app.use(express.json());
 
 app.use(requestLogger); // подключаем логгер запросов
