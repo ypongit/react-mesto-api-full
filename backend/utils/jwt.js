@@ -13,7 +13,7 @@ const { NODE_ENV, JWT_SECRET_KEY } = process.env;
 // eslint-disable-next-line arrow-body-style
 const generateToken = (payload) => {
   // eslint-disable-next-line no-undef
-  return jwt.sign(payload, JWT_SECRET_KEY/* NODE_ENV === 'production' ? JWT_SECRET_KEY : 'dev-secret' */, { expiresIn: '7d' });
+  return jwt.sign(payload, NODE_ENV === 'production' ? JWT_SECRET_KEY : 'dev-secret', { expiresIn: '7d' });
 };
 
 // eslint-disable-next-line no-unused-vars

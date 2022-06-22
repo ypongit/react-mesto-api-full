@@ -1,10 +1,18 @@
 import { BASE_URL } from './constants';
 class Api {
   constructor({ baseUrl, headers }) {
-    this._headers = headers;
+    // this._headers = headers;
     this._baseUrl = baseUrl;
     // тело конструктора
   }
+
+  get _headers() {
+    return {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    }
+  }
+
 // загрузка данных профиля
   getProfile(){
     return fetch(`${this._baseUrl}/users/me `, {
@@ -117,6 +125,7 @@ const api = new Api({
   // authorization: '3e042cce-8939-40c2-9f95-48414868d982',
   headers: {
     // authorization: '3e042cce-8939-40c2-9f95-48414868d982',
+    // authorization: `Bearer ${ localStorage.getItem('jwt') }`,
     'Content-Type': 'application/json'
   }
 });

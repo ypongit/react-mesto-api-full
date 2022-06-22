@@ -1,7 +1,6 @@
 /* eslint-disable consistent-return */
 require('dotenv').config();
 
-const { NODE_ENV, JWT_SECRET_KEY } = process.env;
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');

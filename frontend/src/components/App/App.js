@@ -183,10 +183,11 @@ function App() {
   }
   // Обработчик формы регистрации
   const handleRegister = (email, password) => {
-    return mestoAuth.register(email, password)
-    .then((res) => {
-      handleInfoTooltipClick();
-      console.log('handleRegiste.res -> ', res);
+    return mestoAuth
+      .register(email, password)
+      .then((res) => {
+        handleInfoTooltipClick();
+        console.log('handleRegiste.res -> ', res);
       if(res){
         setInfoTooltipTitle({
           icon: regSuccess,
@@ -198,7 +199,6 @@ function App() {
           title: "Что-то пошло не так! Попробуйте ещё раз."
         })
       }
-
       history.push('/signin')
     })
     .catch((err) => {
@@ -209,19 +209,20 @@ function App() {
   // Обработчик формы авторизации
   const handleLogin = (email, password) => {
     // console.log('handleLogin -> ');
-    return mestoAuth.authorize(email, password)
-     .then((data) => {
-      console.log('data -> ', data)
+    return mestoAuth
+      .authorize(email, password)
+      .then((data) => {
+        console.log('data -> ', data)
        // нужно проверить, есть ли у данных jwt
-       /* if(!data.token){
+       if(!data.token){
          return;
       }
-         localStorage.setItem('jwt', data.token); */
+         localStorage.setItem('jwt', data.token);
         // сбросьте стейт, затем в колбэке установите
-      setEmail(email);
-      console.log({email});
       setLoggedIn(true);
       console.log({loggedIn});
+      setEmail(email);
+      console.log({email});
   });
   }
 
@@ -232,7 +233,6 @@ function App() {
       const jwt = localStorage.getItem('jwt');
        mestoAuth.getContent(jwt)
        .then((res) => {
-        console.log('CheckToken localStorage ->', res);
          if (res){
             console.log('checkToken.res', res)
            setEmail(res.data.email);
