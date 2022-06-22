@@ -1,7 +1,5 @@
-// export const BAcheckResponseSE_URL = 'https://api.mestoyp.students.nomoredomains.xyz';
 import { BASE_URL } from './utils/constants';
 const checkResponse = (response) => {
-  console.log('response ok: ', response);
   if (response.ok){
     return response.json();
   }
@@ -47,20 +45,6 @@ export const authorize = (email, password) => {
   })
 
   .then(checkResponse)
-  /* .then((response => {
-    return response.json()
-    }
-  ))
-  .then((data) => {
-    console.log({data});
-    if (data.token){
-      localStorage.setItem('jwt', data.token);
-      return data;
-    } else {
-      return;
-    }
-  })
-  .catch(err => console.log(err)); */
 };
 
 export const getContent = (token) => {

@@ -68,7 +68,7 @@ function App() {
       api
         .getCards()
         .then(res => {
-          const cardsData = res.map(item => {
+          const cardsData = res.cards.map(item => {
             return {
               name: item.name,
               link: item.link,
@@ -187,7 +187,6 @@ function App() {
       .register(email, password)
       .then((res) => {
         handleInfoTooltipClick();
-        console.log('handleRegiste.res -> ', res);
       if(res){
         setInfoTooltipTitle({
           icon: regSuccess,
@@ -212,7 +211,6 @@ function App() {
     return mestoAuth
       .authorize(email, password)
       .then((data) => {
-        console.log('data -> ', data)
        // нужно проверить, есть ли у данных jwt
        if(!data.token){
          return;
@@ -220,9 +218,7 @@ function App() {
          localStorage.setItem('jwt', data.token);
         // сбросьте стейт, затем в колбэке установите
       setLoggedIn(true);
-      console.log({loggedIn});
       setEmail(email);
-      console.log({email});
   });
   }
 
@@ -234,10 +230,8 @@ function App() {
        mestoAuth.getContent(jwt)
        .then((res) => {
          if (res){
-            console.log('checkToken.res', res)
-           setEmail(res.data.email);
+           setEmail(res.email);
            setLoggedIn(true);
-           console.log({loggedIn});
          }
        })
     }
