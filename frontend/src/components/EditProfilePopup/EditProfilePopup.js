@@ -4,7 +4,8 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function EditProfilePopup({
   isOpen,
   onClose,
-  onUpdateUser
+  onUpdateUser,
+  isSending
 }) {
   // Подписка на контекст
   const currentUser = React.useContext(CurrentUserContext);
@@ -27,10 +28,11 @@ function EditProfilePopup({
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
-
+    console.log({name})
+    console.log({description})
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
-      name,
+      name: name,
       about: description,
     });
   }
@@ -41,7 +43,8 @@ function EditProfilePopup({
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonTitle="Сохранить">
+      buttonTitle={isSending ? "Сохранение..." : "Сохранить"}
+      >
       <label htmlFor="el-name-input" className="popup__field-wrapper">
         <input type="text"
           name="name"

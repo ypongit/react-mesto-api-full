@@ -4,7 +4,8 @@ import PopupWithForm from "../PopupWithForm/PopupWithForm";
 function AddPlacePopup({
   isOpen,
   onClose,
-  onAddPlace
+  onAddPlace,
+  isSending
 }) {
   const [name, setName] = React.useState('');
   const [link, setLink] = React.useState('');
@@ -33,7 +34,8 @@ function AddPlacePopup({
       onSubmit={handleSubmit}
       name="card_add"
       title="Новое место"
-      buttonTitle="Создать">
+      buttonTitle={isSending ? "Создание..." : "Создать"}
+      >
       <label htmlFor="card-name-input" className="popup__field-wrapper">
         <input type="text"
           name="name"

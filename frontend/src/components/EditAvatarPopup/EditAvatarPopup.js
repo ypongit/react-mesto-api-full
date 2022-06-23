@@ -4,7 +4,8 @@ import PopupWithForm from "../PopupWithForm/PopupWithForm";
 function EditAvatarPopup({
   isOpen,
   onClose,
-  onUpdateAvatar
+  onUpdateAvatar,
+  isSending
 }) {
   const inputRef = React.useRef(); // записываем объект, возвращаемый хуком, в переменную
 
@@ -23,7 +24,8 @@ function EditAvatarPopup({
       onSubmit={handleSubmit}
       name="avatar_update"
       title="Обновить аватар"
-      buttonTitle="Сохранить">
+      buttonTitle={isSending ? "Сохранение..." : "Сохранить"}
+      >
 
       <label htmlFor="image-link-input" className="popup__field-wrapper">
         <input

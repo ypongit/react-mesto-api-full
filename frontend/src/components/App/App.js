@@ -44,6 +44,7 @@ function App() {
 
   useEffect(() => {
     checkToken();
+    console.log({currentUser});
   }, []);
 
   useEffect(() => {
@@ -83,7 +84,9 @@ function App() {
   }, [loggedIn]);
 
   // добавление карточки
+  const [isCardSending, setIsCardSending] = React.useState(false);
   function handleAddPlaceSubmit({ name, link }) {
+    setIsCardSending(true);
     api.addCard({ name, link })
       .then((newCard) => {
         setCards([newCard, ...cards]);
@@ -91,7 +94,8 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => setIsCardSending(false));
   }
   // установка- снятие лайка
   function handleCardLike(card) {
@@ -130,22 +134,28 @@ function App() {
   }, []); */
 
   // обработчик редактирования профиля
+  const [isUserSending, setIsUserSending] = React.useState(false);
   function handleUpdateUser({ name, about }) {
+    setIsUserSending(true);
     api.setUserInfo({ name, about })
       .then(currentUserData => {
-        setCurrentUser(currentUserData);
+        setCurrentUser(currentUserData.user);
         closeAllPopups();
       })
-      .catch((err) => { console.log(err); });
+      .catch((err) => { console.log(err); })
+      .finally(() => setIsUserSending(false));
   }
 
+  const [isAvatarSending, setIsAvatarSending] = React.useState(false);
   function handleUpdateAvatar(avatar) {
+    setIsAvatarSending(true);
     api.setAvatar(avatar)
       .then(currentUserData => {
-        setCurrentUser(currentUserData);
+        setCurrentUser(currentUserData.user);
         closeAllPopups();
       })
-      .catch((err) => { console.log(err); });
+      .catch((err) => { console.log(err); })
+      .finally(() => setIsAvatarSending(false));
   }
 
   function handleEditAvatarClick() {
@@ -291,6 +301,7 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          isSending={isUserSending}
         />
 
         {/* Форма добавления карточки («Новое место»)*/}
@@ -298,6 +309,7 @@ function App() {
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
+          isSending={isCardSending}
         />
 
         {/* Форма удаления карточки («Вы уверены?»)*/}
@@ -312,6 +324,7 @@ function App() {
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          isSending={isAvatarSending}
         />
 
         {/* Значение selectedCard должно передаваться с помощью пропса card в компонент ImagePopup */}
