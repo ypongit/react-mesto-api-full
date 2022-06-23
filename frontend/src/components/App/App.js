@@ -96,7 +96,7 @@ function App() {
   // установка- снятие лайка
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     api.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
@@ -109,7 +109,7 @@ function App() {
   }
   // удаление карточки
   function handleCardDelete(card) {
-    const isOwn = card.owner._id === currentUser._id;
+    const isOwn = card.owner === currentUser._id;
     if (isOwn) {
       api.deleteCard(card._id)
         .then(() => {

@@ -13,7 +13,7 @@ function Card({
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = owner._id === currentUser._id;
+  const isOwn = owner === currentUser._id;
   // console.log('isOwn -> ', isOwn)
 // Создаём переменную, которую после зададим в `className` для кнопки удаления
   const cardDeleteButtonClassName = (
@@ -28,7 +28,6 @@ const cardLikeButtonClassName = `element__like-button ${isLiked ? 'element__like
     onCardClick(card);
   }
 function handleLikeClick(){
-  // console.log('handleLikeClick ->', card)
   onCardLike(card);
 }
 function handleDeleteClick(){
