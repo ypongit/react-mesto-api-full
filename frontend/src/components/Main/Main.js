@@ -14,8 +14,6 @@ function Main({
 }) {
   //переменные состояния отвечающие за данные пользователя
   const currentUser = React.useContext(CurrentUserContext);
-  console.log('Main.currentUser', currentUser);
-  console.log('Main.currentUser.name', currentUser.name);
   return (<main className="content">
     <section className="profile">
       <div className="profile__data">

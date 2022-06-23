@@ -44,7 +44,6 @@ function App() {
 
   useEffect(() => {
     checkToken();
-    console.log({currentUser});
   }, []);
 
   useEffect(() => {

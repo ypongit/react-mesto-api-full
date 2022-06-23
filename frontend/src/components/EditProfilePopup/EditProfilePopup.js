@@ -28,8 +28,6 @@ function EditProfilePopup({
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
-    console.log({name})
-    console.log({description})
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
       name: name,
