@@ -47,12 +47,14 @@ app.post('/signup', celebrate({
     // .pattern(/^https?:\/\/(w{3}\.)?[\w]*\.ru\/[-._~:/?#[]@!$&'()*\+,;=]*#?$/),
   }),
 }), createUser);
-app.use(errorLogger); // подключаем логгер ошибок
-// обработчики ошибок
+// Роут неизвестного маршрута
 app.use('*', isAuthorized, (req, res, next) => {
   next(new NotFoundError('Запрашиваемая страница не найдена'));
 });
+// логгер ошибок
+app.use(errorLogger);
 
+// обработчики ошибок
 app.use(errors()); // обработчик ошибок celebrate
 
 // мидлвэр для централизованной обработки ошибок
