@@ -17,8 +17,6 @@ function InfoTooltip({
         <button type="button" className="popup__close" onClick={onClose}></button>
         <img src={icon} alt="знак удачи" className="popup__union-image" />
         <h2 className="popup__heading">{title}</h2>
-
-
       </div>
     </div>
   )

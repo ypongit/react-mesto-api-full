@@ -11,7 +11,7 @@ require('dotenv').config();
 
 const MONGO_DUPLICATE_KEY_CODE = 11000;
 const saltRound = 10;
-const { NODE_ENV, JWT_SECRET_KEY } = process.env;
+const { /* NODE_ENV, */ JWT_SECRET_KEY } = process.env;
 // const { JWT_SECRET_KEY = 'dev-secret' } = process.env;
 // const JWT_SECRET_KEY = '1234567890';
 //  const req = require('express/lib/request');
